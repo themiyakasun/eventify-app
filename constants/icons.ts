@@ -8,4 +8,20 @@ import facebook from '@/assets/icons/facebook.png';
 import google from '@/assets/icons/google.png';
 import apple from '@/assets/icons/apple.png';
 
-export default { email, eye, hidden, password, facebook, google, apple, user };
+import home from '@/assets/icons/home.png';
+import calendar from '@/assets/icons/calendar.png';
+import pin from '@/assets/icons/pin.png';
+
+export default {
+  email,
+  eye,
+  hidden,
+  password,
+  facebook,
+  google,
+  apple,
+  user,
+  home,
+  calendar,
+  pin,
+};

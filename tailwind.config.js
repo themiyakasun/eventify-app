@@ -37,6 +37,7 @@ module.exports = {
         success: '#27AE60',
         warning: '#E2B93B',
         error: '#EB5757',
+        icon: '#ADABAB',
         backgroundImage: {
           'gradient-orange': 'linear-gradient(to right, #F76810, #F76810)',
           'gradient-black': 'linear-gradient(to right, #171924, #171924)',
