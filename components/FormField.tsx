@@ -5,9 +5,11 @@ import icons from '@/constants/icons';
 type Props = {
   type: string;
   placeHolder: string;
+  value?: string;
+  handleChangeText?: (value: string) => void;
 };
 
-const FormField = ({ type, placeHolder }: Props) => {
+const FormField = ({ type, placeHolder, value, handleChangeText }: Props) => {
   const [pwVisibilty, setPwVisibilty] = useState(false);
 
   let icon;
@@ -17,6 +19,9 @@ const FormField = ({ type, placeHolder }: Props) => {
       break;
     case 'password':
       icon = icons.password;
+      break;
+    case 'text':
+      icon = icons.user;
       break;
     default:
       icon = icons.email;
@@ -37,6 +42,8 @@ const FormField = ({ type, placeHolder }: Props) => {
         style={{ flex: 1 }}
         placeholder={placeHolder}
         underlineColorAndroid='transparent'
+        value={value}
+        onChangeText={handleChangeText}
         secureTextEntry={type === 'password' && !pwVisibilty}
       />
       {type === 'password' && (

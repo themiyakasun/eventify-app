@@ -1,16 +1,36 @@
-import { View, Text, TextInput, ScrollView, Switch } from 'react-native';
-import React, { useState } from 'react';
+import { View, Text, ScrollView, Switch, Alert } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Link, Redirect } from 'expo-router';
+
 import FormField from '@/components/FormField';
 import PrimaryButton from '@/components/PrimaryButton';
-import { Link } from 'expo-router';
 import SocialButton from '@/components/SocialButton';
 import icons from '@/constants/icons';
+import { googleLogin } from '@/lib/appwrite';
+import { useGlobalContext } from '@/lib/global-provider';
 
 const SignIn = () => {
+  const { refetch, loading, isLoggedIn } = useGlobalContext();
   const [isRemember, setIsRemember] = useState(false);
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+  });
 
   const toggleSwitch = () => setIsRemember(!isRemember);
+
+  if (!loading && isLoggedIn) return <Redirect href='/' />;
+
+  const handleGoogleLogin = async () => {
+    const result = await googleLogin();
+
+    if (result) {
+      refetch();
+    } else {
+      Alert.alert('error', 'Failed to login');
+    }
+  };
 
   return (
     <SafeAreaView className='h-full px-4 bg-white'>
@@ -56,7 +76,7 @@ const SignIn = () => {
 
           <View className='flex-row items-center justify-center gap-5'>
             <SocialButton icon={icons.facebook} />
-            <SocialButton icon={icons.google} />
+            <SocialButton icon={icons.google} onPress={handleGoogleLogin} />
             <SocialButton icon={icons.apple} />
           </View>
 
